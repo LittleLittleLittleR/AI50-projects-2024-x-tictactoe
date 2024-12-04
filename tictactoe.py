@@ -58,7 +58,8 @@ def result(board, action):
 
     row = action[0]
     column = action[1]
-
+    if not(0 <= row <= 2) or not(0 <= column <= 2):
+        raise Exception("move is out-of-bounds")
     if board[row][column] != EMPTY:
         raise Exception("cell is already occupied")
 
