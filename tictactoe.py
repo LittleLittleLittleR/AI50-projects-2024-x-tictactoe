@@ -120,6 +120,11 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
+
+    # If end of game return None
+    if terminal(board):
+        return None
+    
     def max_value(board):
         if terminal(board):
             return utility(board)
@@ -139,10 +144,12 @@ def minimax(board):
     turn = player(board)
     lst = []
     output_act = None
+    
     if turn == X:
         output_val = -100
         for action in actions(board):
             value = min_value(result(board, action))
+            lst.append([action, value])
             if value > output_val:
                 output_val = value
                 output_act = action
@@ -150,8 +157,10 @@ def minimax(board):
         output_val = 100
         for action in actions(board):
             value = max_value(result(board, action))
+            lst.append([action, value])
             if value < output_val:
                 output_val = value
                 output_act = action
                 
     return output_act
+    
